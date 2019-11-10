@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data type="template" name="NPCTemplate">
+  <NPCTemplate id="100">
+    <name type="string">王小二</name>
+    <nationality type="Nationality">CHINA</nationality>
+  </NPCTemplate>
+  <NPCTemplate id="101">
+    <name type="string">李大狗</name>
+    <nationality type="Nationality">CHINA</nationality>
+  </NPCTemplate>
+  <NPCTemplate id="102">
+    <name type="string">Tanaka</name>
+    <nationality type="Nationality">JAPAN</nationality>
+  </NPCTemplate>
+  <NPCTemplate id="103">
+    <name type="string">赵七炫</name>
+    <nationality type="Nationality">KOREA</nationality>
+  </NPCTemplate>
+</data>

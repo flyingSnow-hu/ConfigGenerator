@@ -1,0 +1,11 @@
+{
+  "name": "com.flyingsnow.configgenerator",
+  "displayName": "Config Generator",
+  "version": "0.0.1",
+  "description": "Easy Tool for translating excel worksheets to C# Objects",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flyingSnow-hu/ConfigGenerator.git"
+  }
+}

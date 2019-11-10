@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data type="relation" name="NPCCityRelation">
+  <NPCCityRelation npc_id="1000" city_id="2000">
+    <hour type="[]" itemType="int" />
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1000" city_id="2001">
+    <hour type="[]" itemType="int">
+      <int type="int">3</int>
+      <int type="int">4</int>
+      <int type="int">5</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1000" city_id="2002">
+    <hour type="[]" itemType="int">
+      <int type="int">1</int>
+      <int type="int">2</int>
+      <int type="int">10</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1001" city_id="2000">
+    <hour type="[]" itemType="int" />
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1001" city_id="2001">
+    <hour type="[]" itemType="int">
+      <int type="int">3</int>
+      <int type="int">4</int>
+      <int type="int">5</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1001" city_id="2002">
+    <hour type="[]" itemType="int">
+      <int type="int">10</int>
+      <int type="int">11</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1002" city_id="2000">
+    <hour type="[]" itemType="int">
+      <int type="int">10</int>
+      <int type="int">11</int>
+      <int type="int">12</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1002" city_id="2001">
+    <hour type="[]" itemType="int">
+      <int type="int">7</int>
+      <int type="int">8</int>
+      <int type="int">9</int>
+      <int type="int">10</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1002" city_id="2002">
+    <hour type="[]" itemType="int" />
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1003" city_id="2000">
+    <hour type="[]" itemType="int">
+      <int type="int">4</int>
+      <int type="int">5</int>
+      <int type="int">6</int>
+      <int type="int">10</int>
+      <int type="int">11</int>
+    </hour>
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1003" city_id="2001">
+    <hour type="[]" itemType="int" />
+  </NPCCityRelation>
+  <NPCCityRelation npc_id="1003" city_id="2002">
+    <hour type="[]" itemType="int" />
+  </NPCCityRelation>
+</data>
