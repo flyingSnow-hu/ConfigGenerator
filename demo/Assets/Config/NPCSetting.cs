@@ -1,4 +1,4 @@
-public class NPCSetting:XMLReader
+public class NPCSetting
 {
     public float timeFactor { get; private set; }
     public int npcCount { get; private set; }
