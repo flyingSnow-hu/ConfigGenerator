@@ -10,7 +10,7 @@
 
 # 快速开始
  1. 把 Packages/com.flyingsnow.configgenerator 拷贝到你的项目 Packages 里
- 2. 建立 Assets/ConfigSheets 存放 Excel 文件
+ 2. 建立 Assets/ConfigSheets~ 存放 Excel 文件
  3. 建立 Assets/StreamingAssets/Config 存放 xml 文件
  4. 按下面的格式要求编写你的 Excel 文件，点击菜单 **Config/Translate Config** 命令翻译成 xml
  5. 按照格式要求定义 C# class 并绑定

@@ -184,7 +184,8 @@ public class XMLReader
                 string name = childNode.Name;
                 try
                 {
-                    obj.GetType().GetProperty(name).SetValue(obj, GetNodeData(childNode), null);
+                    var parent = obj.GetType();
+                    parent.GetProperty(name).SetValue(obj, GetNodeData(childNode,obj), null);
                 }
                 catch (Exception e)
                 {
@@ -199,7 +200,7 @@ public class XMLReader
         }
     }
 
-    private object GetNodeData(XmlNode node)
+    private object GetNodeData(XmlNode node, object parent)
     {
         string type = node.Attributes["type"].Value;
         if (type.EndsWith("_id"))
@@ -214,18 +215,18 @@ public class XMLReader
                 return string.IsNullOrEmpty(node.InnerText) ? 0f : float.Parse(node.InnerText);
             case "string":
                 return node.InnerText;
-            case "list":
-                Type genericType = this.GetType().GetProperty(node.Name).PropertyType;
+            case "[]":
+                Type genericType = parent.GetType().GetProperty(node.Name).PropertyType;
                 object list = Activator.CreateInstance(genericType);
 
                 for (int i = 0; i < node.ChildNodes.Count; i++)
                 {
                     XmlNode childNode = node.ChildNodes[i];
-                    list.GetType().GetMethod("Add").Invoke(list, new object[] { GetNodeData(childNode) });
+                    list.GetType().GetMethod("Add").Invoke(list, new object[] { GetNodeData(childNode, parent) });
                 }
                 return list;
             default:
-                Type propertyType = this.GetType().GetProperty(node.Name).PropertyType;
+                Type propertyType = parent.GetType().GetProperty(node.Name).PropertyType;
                 if (propertyType.IsSubclassOf(typeof(Enum)))
                 {
                     //枚举类型.
@@ -236,7 +237,7 @@ public class XMLReader
                     catch
                     {
                         Debug.LogError(string.Format("Undefined Enum:{0}.{1}", type, node.InnerText));
-                        return this.GetType().GetProperty(node.Name).GetValue(this, null);
+                        return parent.GetType().GetProperty(node.Name).GetValue(parent, null);
                     }
                 }
                 else
