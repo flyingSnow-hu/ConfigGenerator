@@ -10,12 +10,12 @@ using System.Xml;
 
 class ExcelTranslator
 {
-    public static readonly string SHEETS_PATH = Application.dataPath + "/ConfigSheets~";
 
     [MenuItem("Config/Translate Config")]
     static void TranslateAll()
     {
-        DirectoryInfo folder = new DirectoryInfo(SHEETS_PATH);
+        ConfigGeneratorSettings setting = ConfigGeneratorSettings.GetOrCreateSettings();
+        DirectoryInfo folder = new DirectoryInfo(setting.GetPath());
         foreach (FileInfo fileInfo in folder.GetFiles())
         {
             if (fileInfo.Extension == ".xlsx")
