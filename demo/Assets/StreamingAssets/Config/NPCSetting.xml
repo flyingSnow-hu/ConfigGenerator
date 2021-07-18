@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <data type="setting" name="NPCSetting">
-  <timeFactor type="float">3.1415</timeFactor>
-  <npcCount type="int">10</npcCount>
-  <assetPath type="string">http://download.game.com</assetPath>
+  <NPCSetting>
+    <timeFactor type="float">3.1415</timeFactor>
+    <npcCount type="int">10</npcCount>
+    <assetPath type="string">http://download.game.com</assetPath>
+  </NPCSetting>
 </data>

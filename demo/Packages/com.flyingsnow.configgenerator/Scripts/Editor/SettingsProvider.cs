@@ -21,6 +21,13 @@ namespace flyingSnow
                     var settings = ConfigGeneratorSettings.GetInstance();     
                     settings.sourceDir = EditorGUILayout.TextField("Path of Excel Files", settings.sourceDir);
                     settings.targetDir = EditorGUILayout.TextField("Path of Exported Files", settings.targetDir);
+                    settings.targetFormat = (ConfigGeneratorSettings.TargetFormat)EditorGUILayout.Popup(
+                        "Format",
+                        (int)settings.targetFormat,
+                        ConfigGeneratorSettings.TargetFormatDisplays,
+                        GUILayout.MaxWidth(300)
+                    );
+
                     if(GUI.changed)
                     {
                         settings.Save();

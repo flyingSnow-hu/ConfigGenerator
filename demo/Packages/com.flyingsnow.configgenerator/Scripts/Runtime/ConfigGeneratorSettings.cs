@@ -10,10 +10,25 @@ namespace flyingSnow
     [Serializable]
     public class ConfigGeneratorSettings
     {
+        public enum TargetFormat
+        {
+            Json = 0,
+            XML = 1,
+        }
+        public static readonly string[] TargetFormatDisplays = {"Json", "XML"};
+
         public const string k_MyCustomSettingsPath = "ProjectSettings/ConfigGeneratorSettings.asset";
 
         [SerializeField] public string sourceDir;
         [SerializeField] public string targetDir;
+        [SerializeField] public TargetFormat targetFormat;
+
+        private ConfigGeneratorSettings()
+        {            
+            sourceDir = "Assets/ConfigSheets~";
+            targetDir = "Assets/StreamingAssets/Config";
+            targetFormat = TargetFormat.Json;
+        }
 
         public static ConfigGeneratorSettings GetInstance()
         {
@@ -21,8 +36,6 @@ namespace flyingSnow
             if (!File.Exists(k_MyCustomSettingsPath))
             {
                 settings = new ConfigGeneratorSettings();
-                settings.sourceDir = "Assets/ConfigSheets~";
-                settings.targetDir = "Assets/StreamingAssets/Config";
                 settings.Save();
             }else
             {

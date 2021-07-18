@@ -144,7 +144,9 @@ namespace flyingSnow
                     xmlDoc.Load(filePath);
 
                     T result = new T();
-                    XmlNode xmlNode = xmlDoc.ChildNodes[1];  // 0节点是xml声明
+                    XmlNode xmlNode = 
+                        xmlDoc.ChildNodes[1]  // 0节点是xml声明
+                              .ChildNodes[0];
                     SetData(result, xmlNode);
                     return result;
                 }
