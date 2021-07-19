@@ -26,12 +26,12 @@ namespace flyingSnow
             switch (setting.targetFormat)
             {
                 case ConfigGeneratorSettings.TargetFormat.XML:
-                    var t = new XMLTranslator();
-                    t.Translate();
+                    var tx = new XMLTranslator();
+                    tx.Translate();
                     break;
                 default:
-                    // t = new JsonTranslator();
-                    // t.Translate();
+                    var tj = new JsonTranslator();
+                    tj.Translate();
                     break;
             }
             AssetDatabase.Refresh();

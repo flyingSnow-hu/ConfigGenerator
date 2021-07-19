@@ -1,0 +1,22 @@
+{
+  "100": {
+    "id": "100",
+    "name": "王小二",
+    "nationality": "CHINA"
+  },
+  "101": {
+    "id": "101",
+    "name": "李大狗",
+    "nationality": "CHINA"
+  },
+  "102": {
+    "id": "102",
+    "name": "Tanaka",
+    "nationality": "JAPAN"
+  },
+  "103": {
+    "id": "103",
+    "name": "赵七炫",
+    "nationality": "KOREA"
+  }
+}

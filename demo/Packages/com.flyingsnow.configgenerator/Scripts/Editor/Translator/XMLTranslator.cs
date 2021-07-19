@@ -20,7 +20,6 @@ namespace flyingSnow
         {
 
             xmlDoc = new XmlDocument();
-            // this.configName = configName;
 
             //XML的声明段落,<?xmlversion="1.0" encoding="utf-8"?>
             XmlDeclaration xmldecl;

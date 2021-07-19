@@ -157,6 +157,15 @@ NPC ID|城市 ID|出现时间
 
 
 # C# class 的说明
+(暂缺)
+
+
+# 路线图
+JsonReader
+类型更名？
+C# Reader
+自动生成 C# class，去掉 Template 类
+
 
 
 
