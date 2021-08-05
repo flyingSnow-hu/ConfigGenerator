@@ -1,8 +1,8 @@
 public class NPCSetting
 {
-    public float timeFactor { get; private set; }
-    public int npcCount { get; private set; }
-    public string assetPath { get; private set; }
+    public float timeFactor;
+    public int npcCount;
+    public string assetPath;
 }
 
 public enum Nationality
@@ -11,8 +11,10 @@ public enum Nationality
     JAPAN = 2,
     KOREA = 3
 }
+
+
 public class NPCTemplate:Template
 {    
-    public string name { get; private set; }
-    public Nationality nationality { get; private set; }
+    public string name;
+    public Nationality nationality;
 }

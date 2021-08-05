@@ -25,6 +25,10 @@ namespace flyingSnow
             DirectoryInfo folder = new DirectoryInfo(setting.GetSourcePath());
             switch (setting.targetFormat)
             {
+                case ConfigGeneratorSettings.TargetFormat.CSharp:
+                    var cst = new CSharpTranslator();
+                    cst.Translate();
+                    break;
                 case ConfigGeneratorSettings.TargetFormat.XML:
                     var tx = new XMLTranslator();
                     tx.Translate();

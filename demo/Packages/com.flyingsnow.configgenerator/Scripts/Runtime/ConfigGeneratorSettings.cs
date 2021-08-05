@@ -12,10 +12,11 @@ namespace flyingSnow
     {
         public enum TargetFormat
         {
-            Json = 0,
-            XML = 1,
+            CSharp = 0,
+            Json = 1,
+            XML = 2,
         }
-        public static readonly string[] TargetFormatDisplays = {"Json", "XML"};
+        public static readonly string[] TargetFormatDisplays = {"C#", "Json", "XML"};
 
         public const string k_MyCustomSettingsPath = "ProjectSettings/ConfigGeneratorSettings.asset";
 

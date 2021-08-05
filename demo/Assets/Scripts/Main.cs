@@ -5,19 +5,15 @@ using flyingSnow;
 
 public class Main : MonoBehaviour
 {
-    void Start()
+    public void OnClick()
     {
         var reader = new XMLReader();
 
-        var npcSetting = reader.LoadSetting<NPCSetting>("NPCSetting");
-        Debug.Log(npcSetting.assetPath);
+        // var npcSetting = reader.LoadSetting<NPCSetting>("NPCSetting");
+        // Debug.Log(npcSetting.assetPath);
 
         var npcTemplates = reader.LoadTemplate<NPCTemplate>("NPCTemplate");
-        Debug.Log(npcTemplates[101].nationality);
-    }
-
-    void Update()
-    {
-        
+        Debug.Log(npcTemplates[101].name);
+        Debug.Log((Nationality)npcTemplates[101].nationality);
     }
 }
