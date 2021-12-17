@@ -7,13 +7,17 @@ public class Main : MonoBehaviour
 {
     public void OnClick()
     {
-        var reader = new XMLReader();
-
-        // var npcSetting = reader.LoadSetting<NPCSetting>("NPCSetting");
-        // Debug.Log(npcSetting.assetPath);
-
-        var npcTemplates = reader.LoadTemplate<NPCTemplate>("NPCTemplate");
-        Debug.Log(npcTemplates[101].name);
-        Debug.Log((Nationality)npcTemplates[101].nationality);
+        var dict = new DualKeyDictionary<string, string, string>(3);
+        dict.Set("Apple", "Argentina", "AA");
+        dict.Set("Apple", "Brasil", "AB");
+        dict.Set("Apple", "China", "AC");
+        dict.Set("Banana", "Argentina", "BA");
+        dict.Set("Banana", "Brasil", "BB");
+        dict.Set("Banana", "China", "BC");
+        dict.Set("Coconut", "Argentina", "CA");
+        dict.Set("Coconut", "Brasil", "CB");
+        dict.Set("Coconut", "China", "CC");
+        dict.Print();
+        Debug.Log("完");
     }
 }

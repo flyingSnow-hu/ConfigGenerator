@@ -43,6 +43,28 @@ public partial class Config {{
 
         private const string SettingFormat = "        {2}";
 
+        private const string RelationTableFormat = @"using System.Collections.Generic;
+public partial class Config
+{{
+    public readonly Dictionary<int, Dictionary<int, {0}>> {0} = new Dictionary<int, Dictionary<int, {0}>>({1})
+    {{
+    }};
+}}";
+
+        private const string RelationFormat = @"
+        {{
+            {0},
+            new()
+            {{
+                {{
+                    {1},
+                    new()
+                    {{
+{2}
+                    }}
+            }}
+        }}";
+
         private string configType;
         List<CSharpRow> root;
 
@@ -55,7 +77,7 @@ public partial class Config {{
                     break;
                 case "[]":
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine($"List<{cell.itemType}> {cell.name} = new List<{cell.itemType}>()");
+                    sb.AppendLine($"{cell.name} = new List<{cell.itemType}>()");
                     sb.AppendLine("{");
 
                     if (!string.IsNullOrEmpty(cell.value))
@@ -63,7 +85,7 @@ public partial class Config {{
                         string[] valueList = cell.value.Split(';');
                         sb.AppendLine(string.Join(",", valueList.Select(s=>GetCsForm(cell.itemType, s))));
                     }
-                    sb.AppendLine("};");
+                    sb.AppendLine("}");
                     row.lines.Add(sb.ToString());
                     break;
             }
@@ -116,9 +138,13 @@ public partial class Config {{
                     lineIntedent = "        ";
                     break;
                 case "template":
-                case "relation":
                     tableTemplate = TemplateTableFormat;
                     rowTemplate = TemplateFormat;
+                    lineIntedent = "                ";
+                    break;
+                case "relation":
+                    tableTemplate = RelationTableFormat;
+                    rowTemplate = RelationFormat;
                     lineIntedent = "                ";
                     break;
                 default:
