@@ -328,6 +328,34 @@ namespace flyingSnow
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new Enumerator(this);
+        }       
+
+        public PartialEnumerator PartialEnumeratorKey1(TK1 key1)
+        {
+            return new PartialEnumerator(this, 
+                ()=>{                    
+                    int hashCode1 = comparer1.GetHashCode(key1) & 0x7FFFFFFF;
+                    int targetBucket1 = hashCode1 % buckets1.Length;
+                    return buckets1[targetBucket1];
+                },
+                (index)=>{
+                    return entries[index].next1;
+                } 
+            );
+        }       
+
+        public PartialEnumerator PartialEnumeratorKey2(TK2 key2)
+        {
+            return new PartialEnumerator(this, 
+                ()=>{                    
+                    int hashCode2 = comparer2.GetHashCode(key2) & 0x7FFFFFFF;
+                    int targetBucket2 = hashCode2 % buckets2.Length;
+                    return buckets2[targetBucket2];
+                },
+                (index)=>{
+                    return entries[index].next2;
+                } 
+            );
         }
 
         public struct Enumerator : IEnumerator<KeyValuePair>
@@ -404,6 +432,99 @@ namespace flyingSnow
                 index = 0;
                 current = new KeyValuePair();
             }
+        }
+
+        
+        public struct PartialEnumerator : IEnumerator<KeyValuePair>, IEnumerable<KeyValuePair>
+        {
+            private DualKeyDictionary<TK1, TK2, TV> dictionary;
+            private Func<int> firstEntryFunc;
+            private Func<int, int> nextEntryFunc;
+            private int version;
+            private int entry;
+            private KeyValuePair current;
+
+            internal PartialEnumerator(
+                DualKeyDictionary<TK1, TK2, TV> dictionary, 
+                Func<int> firstEntryFunc,
+                Func<int, int> nextEntryFunc
+            )
+            {
+                this.dictionary = dictionary;
+                this.firstEntryFunc = firstEntryFunc;
+                this.nextEntryFunc = nextEntryFunc;
+                version = dictionary.version;
+                entry = firstEntryFunc();
+                current = new KeyValuePair();
+            }
+            public KeyValuePair Current => current;
+
+            object IEnumerator.Current
+            {
+                get { 
+                    if(entry < 0) {
+                        throw new InvalidOperationException("不能在遍历时修改字典");
+                    }
+                    return new KeyValuePair()
+                    {
+                        key1 = current.key1,
+                        key2 = current.key2,
+                        value = current.value
+                    };
+                }
+            }
+
+            public void Dispose(){}
+
+            public bool MoveNext()
+            {
+                if (version != dictionary.version)
+                {
+                    throw new InvalidOperationException("不能在遍历时修改字典");
+                }
+
+                // Use unsigned comparison since we set index to dictionary.count+1 when the enumeration ends.
+                // dictionary.count+1 could be negative if dictionary.count is Int32.MaxValue
+                while ((uint)entry < (uint)dictionary.count)
+                {
+                    if (dictionary.entries[entry].hashCode1 >= 0)
+                    {
+                        current = new KeyValuePair() 
+                        {
+                            key1 = dictionary.entries[entry].key1,
+                            key2 = dictionary.entries[entry].key2,
+                            value = dictionary.entries[entry].value
+                        };
+                        entry = nextEntryFunc(entry);
+                        return true;
+                    }
+                    entry = nextEntryFunc(entry);;
+                }
+
+                entry = -1;
+                current = new KeyValuePair();
+                return false;
+            }
+
+            public void Reset()
+            {
+                if (version != dictionary.version)
+                {
+                    throw new InvalidOperationException("不能在遍历时修改字典");
+                }
+                entry = firstEntryFunc();
+                current = new KeyValuePair();
+            }
+
+            public IEnumerator<KeyValuePair> GetEnumerator()
+            {
+                return this;
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this;
+            }  
         }
     }
 }
