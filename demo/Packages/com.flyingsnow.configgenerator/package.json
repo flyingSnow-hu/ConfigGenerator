@@ -1,7 +1,7 @@
 {
   "name": "com.flyingsnow.configgenerator",
   "displayName": "Config Generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Easy Tool for translating excel worksheets to C# Objects",
   "dependencies": {},
   "repository": {
