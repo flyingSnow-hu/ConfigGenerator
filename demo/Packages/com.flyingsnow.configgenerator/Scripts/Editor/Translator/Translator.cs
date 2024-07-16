@@ -40,6 +40,16 @@ namespace flyingSnow
             }
             AssetDatabase.Refresh();
         }
+        
+        [MenuItem("Config/Clear Config")]
+        internal static void Clear()
+        {
+            ConfigGeneratorSettings setting = ConfigGeneratorSettings.GetInstance();
+            DirectoryInfo folder = new DirectoryInfo(setting.GetTargetPath());
+            folder.Delete(true);
+            folder.Create();
+            AssetDatabase.Refresh();
+        }
     }
 
 
@@ -256,7 +266,7 @@ namespace flyingSnow
                     }
                     else if (type.EndsWith("_id"))
                     {                    
-                        SetRowAttribute(row, type, value);
+                        SetRefId(row, type, name, value);
                         break;
                     }
                     else
@@ -271,6 +281,6 @@ namespace flyingSnow
 
         protected abstract void AppendCell(TRow row, Cell cell);
         protected abstract void SetRowId(TRow row, string id);
-        protected abstract void SetRowAttribute(TRow row, string key, string value);
+        protected abstract void SetRefId(TRow row, string type, string key, string value);
     }
 }

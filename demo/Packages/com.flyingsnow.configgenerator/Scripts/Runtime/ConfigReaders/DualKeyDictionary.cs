@@ -171,6 +171,11 @@ namespace flyingSnow
             version++;
         }
 
+        public void Add(TK1 key1, TK2 key2, TV value)
+        {
+            Set(key1, key2, value);
+        }
+
         private void Resize()
         {
             Resize(HashHelpers.ExpandPrime(count), false);

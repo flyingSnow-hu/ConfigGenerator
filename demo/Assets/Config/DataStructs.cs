@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class NPCSetting
 {
     public float timeFactor;
@@ -17,4 +19,11 @@ public class NPCTemplate:Template
 {    
     public string name;
     public Nationality nationality;
+}
+
+public class NPCCityRelation
+{
+    public int npcID;
+    public int cityID;
+    public List<int> hour;
 }

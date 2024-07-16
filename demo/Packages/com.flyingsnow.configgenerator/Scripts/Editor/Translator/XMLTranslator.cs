@@ -86,7 +86,7 @@ namespace flyingSnow
             row.SetAttribute("id", id.ToString());
         }
 
-        protected override void SetRowAttribute(XmlElement row, string key, string value)
+        protected override void SetRefId(XmlElement row, string type, string key, string value)
         {
             row.SetAttribute(key, value);
         }

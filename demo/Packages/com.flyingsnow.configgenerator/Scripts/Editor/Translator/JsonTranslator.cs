@@ -105,7 +105,7 @@ namespace flyingSnow
             }
         }
 
-        protected override void SetRowAttribute(dynamic row, string key, string value)
+        protected override void SetRefId(dynamic row, string type, string key, string value)
         {
             row[key] = value;
         }

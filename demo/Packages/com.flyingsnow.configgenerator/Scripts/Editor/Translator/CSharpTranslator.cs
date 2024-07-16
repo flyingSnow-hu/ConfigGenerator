@@ -10,6 +10,8 @@ namespace flyingSnow
     public class CSharpRow
     {
         public string id;
+        public string id2;
+        public int columnCount = 0;
         public List<string> lines;
     }
 
@@ -44,25 +46,18 @@ public partial class Config {{
         private const string SettingFormat = "        {2}";
 
         private const string RelationTableFormat = @"using System.Collections.Generic;
+using flyingSnow;
+
 public partial class Config
 {{
-    public readonly Dictionary<int, Dictionary<int, {0}>> {0} = new Dictionary<int, Dictionary<int, {0}>>({1})
+    public readonly DualKeyDictionary<int, int, {0}> {0} = new ({1})
     {{
+        {2}
     }};
 }}";
 
-        private const string RelationFormat = @"
-        {{
-            {0},
-            new()
-            {{
-                {{
-                    {1},
-                    new()
-                    {{
-{2}
-                    }}
-            }}
+        private const string RelationFormat = @"       {{
+        {1}, {3}, new {0}(){{{2}}}
         }}";
 
         private string configType;
@@ -102,6 +97,10 @@ public partial class Config
                 case "float":
                     return $"{value}f";
                 default:
+                    if (baseType.EndsWith("_id"))
+                    {
+                        return value;
+                    }
                     // 枚举
                     return $"{baseType}.{value}";
             }
@@ -151,7 +150,7 @@ public partial class Config
                     return;
             }
 
-                //{
+            // try{
                 using (var fs = File.Open(fileName, FileMode.Create, FileAccess.Write, FileShare.Read))
                 {
                     byte[] bytes = new UTF8Encoding(true).GetBytes(
@@ -159,9 +158,12 @@ public partial class Config
                             string.Join(",\r\n",
                                 root.Select(
                                     row =>
-                                    string.Format(rowTemplate, configName, row.id,
-                                        string.Join(",\r\n" + lineIntedent, row.lines.ToArray())
-                                    )
+                                    {
+                                        return string.Format(rowTemplate, configName, row.id,
+                                            string.Join(",\r\n" + lineIntedent, row.lines.ToArray()), row.id2
+                                        );
+
+                                    }
                                 )
                             )
                         )
@@ -169,7 +171,7 @@ public partial class Config
 
                     fs.Write(bytes, 0, bytes.Length);
                 }
-            //}
+            // }
         }
 
         protected override void SaveRow(CSharpRow row)
@@ -177,9 +179,17 @@ public partial class Config
             root.Add(row);
         }
 
-        protected override void SetRowAttribute(CSharpRow row, string key, string value)
+        protected override void SetRefId(CSharpRow row, string type, string key, string value)
         {
-            row.lines.Add(value);
+            if (row.columnCount == 0)
+            {
+                row.id = value;
+            }else if (row.columnCount == 1)
+            {
+                row.id2 = value;
+            }
+            row.lines.Add($"{key}={GetCsForm(type, value)}");
+            row.columnCount++;
         }
 
         protected override void SetRowId(CSharpRow row, string id)
